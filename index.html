@@ -5,28 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine?</title>
     <style>
-        /* ... (keep existing styles) ... */
+        body {
+            background: linear-gradient(135deg, #ff99cc, #ff6699);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            overflow: hidden;
+        }
 
-        /* New style for mocking messages */
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff0066;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        #yesButton {
+            font-size: 24px;
+            padding: 15px 30px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #yesButton:hover {
+            background: #45a049;
+            transform: scale(1.1);
+        }
+
+        #noButton {
+            font-size: 24px;
+            padding: 15px 30px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #noButton:hover {
+            background: #e53935;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff0066;
+            font-size: 20px;
+            animation: float 5s infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
         .mock-message {
             position: absolute;
-            color: #ff4444;
+            color: #2a1c1c;
             font-size: 1.2em;
             font-weight: bold;
             white-space: nowrap;
             pointer-events: none;
             animation: fadeOut 2s forwards;
-            text-shadow: 1px 1px white;
+            text-shadow: 2px 2px 4px #000000, 
+                        -2px -2px 4px #000000,
+                        2px -2px 4px #000000,
+                        -2px 2px 4px #000000;
         }
 
         @keyframes fadeOut {
             0% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-50px); }
         }
+
+        .background-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .background-hearts div {
+            position: absolute;
+            color: #ff0066;
+            font-size: 30px;
+            animation: floatBackground 10s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatBackground {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <div class="hearts" id="heartsContainer"></div>
+    <div class="background-hearts">
+        <div style="left: 10%; animation-delay: 0s;">💖</div>
+        <div style="left: 30%; animation-delay: 2s;">💖</div>
+        <div style="left: 50%; animation-delay: 4s;">💖</div>
+        <div style="left: 70%; animation-delay: 6s;">💖</div>
+        <div style="left: 90%; animation-delay: 8s;">💖</div>
+    </div>
     
     <div class="container">
         <h1>💖 Will You Be My Valentine? 💖</h1>
