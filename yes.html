@@ -84,10 +84,9 @@
 <body>
     <div class="container">
         <div class="celebrate">🎉💖🎉</div>
-        <h1>Congratulations!</h1>
+        <h1>Congratulations! You are my Valentine😨😨😨</h1>
         <p>You are invited to Tulsi Restaurant at 7:30, this Friday!</p>
         <p>Dress accordingly! 👗</p>
-        
         <div class="celebrate">🎶🍷🍴</div>
     </div>
 
@@ -106,7 +105,7 @@
             document.body.appendChild(firework);
 
             // Create explosion particles
-            const particleCount = 30;
+            const particleCount = 50; // Increased particles for more effect
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -115,17 +114,17 @@
                 particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 
                 const angle = (i * 360) / particleCount;
-                const velocity = random(50, 150);
+                const velocity = random(100, 200); // Increased velocity for more spread
                 const dx = velocity * Math.cos(angle * Math.PI / 180);
                 const dy = velocity * Math.sin(angle * Math.PI / 180);
                 
                 particle.style.setProperty('--dx', dx + 'px');
                 particle.style.setProperty('--dy', dy + 'px');
                 
-                particle.style.animation = 'shoot 1s forwards';
+                particle.style.animation = 'shoot 1.5s forwards'; // Slightly longer animation
                 document.body.appendChild(particle);
 
-                setTimeout(() => particle.remove(), 1000);
+                setTimeout(() => particle.remove(), 1500);
             }
 
             firework.style.animation = 'explode 0.5s forwards';
@@ -138,35 +137,18 @@
             createFirework(x, y);
         }
 
-        // Variables to control firework frequency
-        let currentInterval = 1000; // Start with 1 second interval
-        const minInterval = 10;    // Minimum interval (milliseconds)
-        let fireworkInterval;
+        // Launch fireworks more frequently
+        const fireworkInterval = setInterval(launchRandomFirework, 200); // Fireworks every 200ms
 
-        // Function to update firework frequency
-        function updateFireworkFrequency() {
-            if (currentInterval > minInterval) {
-                clearInterval(fireworkInterval);
-                currentInterval = Math.max(currentInterval * 0.9, minInterval); // Reduce interval by 10%
-                fireworkInterval = setInterval(launchRandomFirework, currentInterval);
-            }
-        }
-
-        // Start initial firework interval
-        fireworkInterval = setInterval(launchRandomFirework, currentInterval);
-
-        // Increase frequency every 2 seconds
-        setInterval(updateFireworkFrequency, 2000);
-
-        // Launch more initial fireworks
-        for (let i = 0; i < 8; i++) {
-            setTimeout(() => launchRandomFirework(), i * 200);
+        // Launch a burst of fireworks initially
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => launchRandomFirework(), i * 100);
         }
 
         // Launch fireworks on click
         document.addEventListener('click', (e) => {
             // Launch multiple fireworks on each click
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     createFirework(
                         e.clientX + random(-50, 50),
@@ -175,6 +157,9 @@
                 }, i * 100);
             }
         });
+
+        // Stop fireworks after 30 seconds (optional)
+        setTimeout(() => clearInterval(fireworkInterval), 30000);
     </script>
 </body>
 </html>
